@@ -2,32 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Send to ntfy.sh</title>
+  <title>Login & View Report</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <button onclick="sendNotification()">Send Notification</button>
+  <div class="container">
+    <h1>🔐 Scan Report Viewer</h1>
 
-  <script>
-    function sendNotification() {
-      fetch("https://ntfy.sh/blacklantern", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: "test"
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Notification sent!");
-        } else {
-          alert("Failed to send notification.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Error sending request.");
-      });
-    }
-  </script>
+    <div id="login-section">
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+    </div>
+
+    <div id="report-section" style="display:none;">
+      <p>Welcome, <span id="user-label"></span>!</p>
+      <button onclick="loadReport()">Load Scan Report</button>
+      <pre id="output" class="output"></pre>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
